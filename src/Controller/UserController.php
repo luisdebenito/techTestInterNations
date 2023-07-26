@@ -62,13 +62,13 @@ class UserController extends AbstractController
             return $this->json("Group not found", Response::HTTP_NOT_FOUND);
         }
         if ($group->getMembers()->contains($user)) {
-            return new Response('User is already a member of the group.', Response::HTTP_METHOD_NOT_ALLOWED);
+            return $this->json('User is already a member of the group.', Response::HTTP_METHOD_NOT_ALLOWED);
         }
 
         $group->addMember($user);
         $entityManager->flush();
 
-        return new Response('User assigned to the group successfully.', Response::HTTP_OK);
+        return $this->json('User assigned to the group successfully.', Response::HTTP_OK);
     }
 
     #[Route('/user/{userId}/group/{groupId}', name: 'remove_user_from_group', methods: ["DELETE"])]
@@ -88,12 +88,12 @@ class UserController extends AbstractController
         }
 
         if (!$group->getMembers()->contains($user)) {
-            return new Response('User is not a member of the group.', Response::HTTP_METHOD_NOT_ALLOWED);
+            return $this->json('User is not a member of the group.', Response::HTTP_METHOD_NOT_ALLOWED);
         }
 
         $group->removeMember($user);
         $entityManager->flush();
 
-        return new Response('User removed from the group successfully.', Response::HTTP_OK);
+        return $this->json('User removed from the group successfully.', Response::HTTP_OK);
     }
 }

@@ -11,13 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 class GroupController extends AbstractController
 {
     /**
-     * @Rest\View(statusCode=201)
      * @Rest\Post("/group", name="post_group")  *
      * @SWG\Post(
      *     tags={"Group"},
      *     summary="Add a new group",
      *     @SWG\Response(response="200", description="Returned when group created"),
-     *     @SWG\Response(response="400", description="Returned when request"),
      * )
      *
      * @param EntityManagerInterface $entityManager,
